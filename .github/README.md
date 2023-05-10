@@ -24,8 +24,28 @@ do professor.
 <div align="center" style="margin-top: 32px;">
     <img 
         width="100%"
-        style="max-width: 1000px"
+        style="max-width: 1000px; margin-bottom: 24px;"
         src="./img/padrao_arquitetural_web.png" 
         alt="Padrão arquitetural do projeto"
     />
 </div>
+
+<h3>🎨 Arquitetura do Frontend Web:</h3>
+
+`frontend/src:` Código-fonte do projeto. 
+
+`frontend/src/components: ` Componentes de UI reutilizáveis.
+
+`frontend/src/pages: ` Páginas da aplicação. 
+
+`frontend/src/services: ` Serviços de manipulação, transformação de dados e conexão HTTP. 
+
+`frontend/src/models: ` Modelos de entidades da aplicação.
+
+`frontend/src/utils: ` Funções utilitárias reutilizáveis.
+
+`frontend/src/usecases: ` Casos de uso da aplicação.
+
+
+
+
