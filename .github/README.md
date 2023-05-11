@@ -47,5 +47,13 @@ do professor.
 `frontend/src/usecases: ` Casos de uso da aplicação.
 
 
+<h3> Arquitetura do Backend</h3>
+`backend/Models:` Modelos dos objetos.
+
+`backend/Controllers:` Responsável por receber requisições HTTP
+
+`backend/Services:` Camada de serviços intermediaria a camada de dados.
+
+`backend/Repository:` Camada de manipulação dos dados e conexao com banco.
 
 
