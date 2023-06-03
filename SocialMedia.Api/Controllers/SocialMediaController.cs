@@ -21,72 +21,114 @@ namespace SocialMedia.Api.Controllers
         [HttpPost("usuarios")]
         public IActionResult CriarUsuario([FromBody] User user)
         {
-            if(_socialMediaService.CreateUser(user))
+            try
             {
-                return Ok(user);
+                if (_socialMediaService.CreateUser(user))
+                {
+                    return Ok(user);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while creating the user: {ex.Message}");
+            }
         }
 
         // Endpoint para obter informações de um usuário pelo ID
         [HttpGet("usuarios/{id}")]
         public IActionResult ObterUsuario(int id)
         {
-            var user = _socialMediaService.GetUserById(id);
-            
-            if(user == null)
+            try
             {
-                return Ok(user);
+                var user = _socialMediaService.GetUserById(id);
+
+                if (user == null)
+                {
+                    return Ok(user);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while retrieving the user: {ex.Message}");
+            }
         }
 
         // Endpoint para criar uma nova vaga de emprego
         [HttpPost("vagas")]
         public IActionResult CriarVaga([FromBody] JobOffer jobOffer)
         {
-            if (_socialMediaService.CreateJobOffer(jobOffer))
+            try
             {
-                return Ok(jobOffer);
+                if (_socialMediaService.CreateJobOffer(jobOffer))
+                {
+                    return Ok(jobOffer);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while creating the job offer: {ex.Message}");
+            }
         }
 
         // Endpoint para obter todas as vagas de emprego
         [HttpGet("vagas")]
         public IActionResult ObterVagas()
         {
-            var jobs = _socialMediaService.GetJobs();
-
-            if(jobs != null)
+            try
             {
-                return Ok(jobs);
+                var jobs = _socialMediaService.GetJobs();
+
+                if (jobs != null)
+                {
+                    return Ok(jobs);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while retrieving the job offers: {ex.Message}");
+            }
         }
 
         // Endpoint para obter uma vaga de emprego pelo ID
         [HttpGet("vagas/{id}")]
         public IActionResult ObterVaga(int id)
         {
-            var jobOffer = _socialMediaService.GetJobOfferById(id);
-            
-            if(jobOffer != null)
+            try
             {
-                 return Ok(jobOffer);
+                var jobOffer = _socialMediaService.GetJobOfferById(id);
+
+                if (jobOffer != null)
+                {
+                    return Ok(jobOffer);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while retrieving the job offer: {ex.Message}");
+            }
         }
 
         // Endpoint para candidatar-se a uma vaga de emprego
         [HttpPost("vagas/{id}/candidatar")]
         public IActionResult CandidatarVaga([FromBody] Application application)
         {
-            if(_socialMediaService.SubmitApplication(application))
+            try
             {
-                return Ok(application);
+                if (_socialMediaService.SubmitApplication(application))
+                {
+                    return Ok(application);
+                }
+                return BadRequest();
             }
-            return BadRequest();
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while submitting the application: {ex.Message}");
+            }
         }
     }
 }

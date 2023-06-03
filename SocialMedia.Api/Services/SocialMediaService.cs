@@ -14,72 +14,119 @@ namespace SocialMedia.Api.Services
         }
         public bool CreateJobOffer(JobOffer jobOffer)
         {
-           var addJobOffer = _socialMediaRepository.JobOffers.Add(jobOffer);
-            _socialMediaRepository.SaveChanges();
-
-            if(addJobOffer.Entity != null)
+            try
             {
-                return true;
+                var addJobOffer = _socialMediaRepository.JobOffers.Add(jobOffer);
+                _socialMediaRepository.SaveChanges();
+
+                if (addJobOffer.Entity != null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
         }
 
         public bool CreateUser(User user)
         {
-            var addUser =  _socialMediaRepository.Users.Add(user);
-             _socialMediaRepository.SaveChanges();
-
-            if(addUser.Entity != null)
+            try
             {
-                return true;
+                var addUser = _socialMediaRepository.Users.Add(user);
+                _socialMediaRepository.SaveChanges();
+
+                if (addUser.Entity != null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
         }
 
         public JobOffer GetJobOfferById(int jobOfferId)
         {
-            var jobOffer = new JobOffer();
-            jobOffer = _socialMediaRepository.JobOffers.Where(x => x.JobOfferId == jobOfferId).FirstOrDefault();
-            
-            if(jobOffer != null)
+            try
             {
-                return jobOffer;
+                JobOffer? jobOffer = _socialMediaRepository.JobOffers.Where(x => x.JobOfferId == jobOfferId).FirstOrDefault();
+
+                if (jobOffer != null)
+                {
+                    return jobOffer;
+                }
+                return null;
             }
-            return jobOffer;
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
         }
 
         public List<JobOffer> GetJobs()
         {
-            var jobOffers = new List<JobOffer>();
-            jobOffers = _socialMediaRepository.JobOffers.ToList();
-            if(jobOffers != null)
+            try
             {
-                return jobOffers;
+                List<JobOffer>? jobOffers = _socialMediaRepository.JobOffers.ToList();
+
+                if (jobOffers != null)
+                {
+                    return jobOffers;
+                }
+                return null;
             }
-            return jobOffers;
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
         }
 
         public User GetUserById(int userId)
         {
-            var user = new User();
-            user = _socialMediaRepository.Users.Where(x => x.UserId == userId).FirstOrDefault();
-            
-            if(user != null)
+            try
             {
-                return user;
+                User? user = _socialMediaRepository.Users.Where(x => x.UserId == userId).FirstOrDefault();
+
+                if (user != null)
+                {
+                    return user;
+                }
+                return null;
             }
-            return user;
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
         }
 
         public bool SubmitApplication(Application application)
         {
-            var addApplication = _socialMediaRepository.Applications.Add(application);
-
-            if(addApplication.Entity != null)
+            try
             {
-                return true;
+                var addApplication = _socialMediaRepository.Applications.Add(application);
+
+                if (addApplication.Entity != null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:"+ ex.Message);
+            }
         }
+
     }
 }
