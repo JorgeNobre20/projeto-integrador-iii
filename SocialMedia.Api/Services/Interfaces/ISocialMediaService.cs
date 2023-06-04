@@ -1,4 +1,5 @@
-﻿using SocialMedia.Api.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using SocialMedia.Api.Models;
 
 namespace SocialMedia.Api.Services.Interfaces
 {
@@ -10,6 +11,7 @@ namespace SocialMedia.Api.Services.Interfaces
         List<JobOffer> GetJobs();
         JobOffer GetJobOfferById(int jobOfferId);
         bool SubmitApplication(Application application);
-
+        bool UpdateJobOffer(JobOffer jobOffer);
+        bool DeleteJobOffer(JobOffer jobOffer);
     }
 }

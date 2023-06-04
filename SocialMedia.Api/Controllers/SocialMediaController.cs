@@ -43,7 +43,7 @@ namespace SocialMedia.Api.Controllers
             {
                 var user = _socialMediaService.GetUserById(id);
 
-                if (user == null)
+                if (user != null)
                 {
                     return Ok(user);
                 }
@@ -128,6 +128,40 @@ namespace SocialMedia.Api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred while submitting the application: {ex.Message}");
+            }
+        }
+
+        [HttpPost("vaga/atualizar")]
+        public IActionResult AtualizarVaga ([FromBody]JobOffer jobOffer)
+        {
+            try
+            {
+                if (_socialMediaService.UpdateJobOffer(jobOffer))
+                {
+                    return Ok(jobOffer);
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while update the job offer: {ex.Message}");
+            }
+        }
+
+        [HttpPost("vaga/deletar")]
+        public IActionResult DeletarVaga([FromBody] JobOffer jobOffer)
+        {
+            try
+            {
+                if (_socialMediaService.DeleteJobOffer(jobOffer))
+                {
+                    return Ok(jobOffer);
+                }
+                return BadRequest();
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while delete the job offer: {ex.Message}");
             }
         }
     }

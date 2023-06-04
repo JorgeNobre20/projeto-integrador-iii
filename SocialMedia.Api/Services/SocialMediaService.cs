@@ -5,11 +5,11 @@ using SocialMedia.Api.Services.Interfaces;
 
 namespace SocialMedia.Api.Services
 {
-    public class SocialMediaService :  ISocialMediaService                   
+    public class SocialMediaService :  ISocialMediaService
     {
         private readonly SocialMediaRepository _socialMediaRepository;
-        public SocialMediaService(SocialMediaRepository socialMediaRepository) 
-        { 
+        public SocialMediaService(SocialMediaRepository socialMediaRepository)
+        {
             _socialMediaRepository = socialMediaRepository;
         }
         public bool CreateJobOffer(JobOffer jobOffer)
@@ -124,9 +124,47 @@ namespace SocialMedia.Api.Services
             catch (Exception ex)
             {
                 // Handle the exception or log the error message
-                throw new Exception("SQL Exception:"+ ex.Message);
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
+        }
+        public bool UpdateJobOffer(JobOffer jobOffer)
+        {
+            try
+            {
+                var updateJobOffer = _socialMediaRepository.JobOffers.Update(jobOffer);
+                _socialMediaRepository.SaveChanges();
+
+                if (updateJobOffer.Entity != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
             }
         }
 
+        public bool DeleteJobOffer(JobOffer jobOffer)
+        {
+            try
+            {
+                var deleteJobOffer = _socialMediaRepository.JobOffers.Remove(jobOffer);
+                _socialMediaRepository.SaveChanges();
+
+                if (deleteJobOffer.Entity != null)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
+        }
     }
 }
