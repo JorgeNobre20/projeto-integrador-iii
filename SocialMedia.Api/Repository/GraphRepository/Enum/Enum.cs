@@ -7,4 +7,10 @@
         HIGH = 2,
         UNIVERSITY = 3
     }
+    public enum InterestArea
+    {
+        BACKEND = 1,
+        FRONTEND = 2,
+        DEVOPS = 3
+    }
 }

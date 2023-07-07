@@ -1,4 +1,5 @@
 ﻿using SocialMedia.Api.Models;
+using SocialMedia.Api.Repository.GraphRepository.Enum;
 
 namespace SocialMedia.Api.Repository.GraphRepository.Models
 {
