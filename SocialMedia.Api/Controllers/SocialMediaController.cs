@@ -17,6 +17,24 @@ namespace SocialMedia.Api.Controllers
             _socialMediaService = socialMediaService;
         }
 
+        // Endpoint para criar um novo Login
+        [HttpPost("login")]
+        public IActionResult CadastroLogin([FromBody] string email, string password, string name)
+        {
+            try
+            {
+                if (_socialMediaService.CreateLogin(name,email, password))
+                {
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while creating the user: {ex.Message}");
+            }
+        }
+
         // Endpoint para criar um novo usuário
         [HttpPost("usuarios")]
         public IActionResult CriarUsuario([FromBody] User user)

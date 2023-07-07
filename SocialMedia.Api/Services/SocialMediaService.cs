@@ -166,5 +166,41 @@ namespace SocialMedia.Api.Services
                 throw new Exception("SQL Exception:" + ex.Message);
             }
         }
+        public bool CreateLogin(string email, string password, string name)
+        {
+            try
+            {
+                Login login = new Login
+                {
+                    Email = email,
+                    Password = password
+                };
+
+                var newLogin = _socialMediaRepository.Logins.Add(login);
+
+                User user = new User
+                {
+                    Name = name,
+                    Login = newLogin.Entity
+                };
+                _socialMediaRepository.SaveChanges();
+
+                if (CreateUser(user))
+                {
+
+                    if (newLogin.Entity != null)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+
+            }catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
+        }
     }
 }
