@@ -1,14 +1,14 @@
-import { PropsWithChildren } from "react";
+import { FormHTMLAttributes, PropsWithChildren } from "react";
 
 import * as S from "./styles";
 
-type AuthFormProps = {
+type AuthFormProps = FormHTMLAttributes<HTMLFormElement> & {
   title: string;
 }
 
-export const AuthForm = ({ title, children }: PropsWithChildren<AuthFormProps>) => {
+export const AuthForm = ({ title, children, ...rest }: PropsWithChildren<AuthFormProps>) => {
   return (
-    <S.Form>
+    <S.Form {...rest}>
       <S.FormTitle>{title}</S.FormTitle>
       {children}
     </S.Form>

@@ -7,7 +7,10 @@ export const theme = {
     inputPlaceholder: "#939393",
     inputBackground: "#E3E3E3",
     contentWrapperBackground: "#F2F2F2",
-    buttonLabel: "#FFFFFF"
+    buttonLabel: "#FFFFFF",
+    forgotPasswordText: "#3D66A4",
+    light: "#FFFFFF",
+    secondaryAction: "#00A3D7"
   },
 
   radius: {

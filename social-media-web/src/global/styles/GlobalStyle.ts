@@ -23,6 +23,10 @@ export const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  a{
+    text-decoration: none;
+  }
+
   button{
     cursor: pointer;
   }

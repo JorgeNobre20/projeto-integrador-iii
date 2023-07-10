@@ -1,2 +1,2 @@
 export { GlobalStyle } from "./GlobalStyle";
-export { SpacingProps } from "./SpacingProps";
+export type { SpacingProps } from "./SpacingProps";
