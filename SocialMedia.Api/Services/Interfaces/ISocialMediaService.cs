@@ -14,5 +14,6 @@ namespace SocialMedia.Api.Services.Interfaces
         bool SubmitApplication(Application application);
         bool UpdateJobOffer(JobOffer jobOffer);
         bool DeleteJobOffer(JobOffer jobOffer);
+        Login GetLogin(string email, string password);
     }
 }

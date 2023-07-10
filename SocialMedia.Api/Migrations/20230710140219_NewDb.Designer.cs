@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialMedia.Api.Repository;
 
@@ -11,9 +12,11 @@ using SocialMedia.Api.Repository;
 namespace SocialMedia.Api.Migrations
 {
     [DbContext(typeof(SocialMediaRepository))]
-    partial class SocialMediaRepositoryModelSnapshot : ModelSnapshot
+    [Migration("20230710140219_NewDb")]
+    partial class NewDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,33 +49,6 @@ namespace SocialMedia.Api.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Applications");
-                });
-
-            modelBuilder.Entity("SocialMedia.Api.Models.InterestArea", b =>
-                {
-                    b.Property<int>("InterestAreaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("InterestAreaId"));
-
-                    b.Property<string>("InterestAreaName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("JobOfferId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("InterestAreaId");
-
-                    b.HasIndex("JobOfferId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("InterestArea");
                 });
 
             modelBuilder.Entity("SocialMedia.Api.Models.JobOffer", b =>
@@ -134,8 +110,8 @@ namespace SocialMedia.Api.Migrations
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("date");
 
-                    b.Property<int?>("Education")
-                        .HasColumnType("int");
+                    b.Property<string>("Education")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -149,9 +125,6 @@ namespace SocialMedia.Api.Migrations
 
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserType")
-                        .HasColumnType("int");
 
                     b.HasKey("UserId");
 
@@ -175,17 +148,6 @@ namespace SocialMedia.Api.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("SocialMedia.Api.Models.InterestArea", b =>
-                {
-                    b.HasOne("SocialMedia.Api.Models.JobOffer", null)
-                        .WithMany("InterestAreas")
-                        .HasForeignKey("JobOfferId");
-
-                    b.HasOne("SocialMedia.Api.Models.User", null)
-                        .WithMany("InterestAreas")
-                        .HasForeignKey("UserId");
-                });
-
             modelBuilder.Entity("SocialMedia.Api.Models.User", b =>
                 {
                     b.HasOne("SocialMedia.Api.Models.Login", "Login")
@@ -200,13 +162,6 @@ namespace SocialMedia.Api.Migrations
             modelBuilder.Entity("SocialMedia.Api.Models.JobOffer", b =>
                 {
                     b.Navigation("Applications");
-
-                    b.Navigation("InterestAreas");
-                });
-
-            modelBuilder.Entity("SocialMedia.Api.Models.User", b =>
-                {
-                    b.Navigation("InterestAreas");
                 });
 #pragma warning restore 612, 618
         }
