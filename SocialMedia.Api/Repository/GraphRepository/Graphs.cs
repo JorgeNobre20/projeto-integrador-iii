@@ -1,5 +1,5 @@
-﻿using SocialMedia.Api.Models;
-using SocialMedia.Api.Repository.GraphRepository.Enum;
+﻿using SocialMedia.Api.Enums;
+using SocialMedia.Api.Models;
 using SocialMedia.Api.Repository.GraphRepository.Models;
 using System.Net;
 using System.Security.Cryptography.Xml;
@@ -70,7 +70,7 @@ namespace SocialMedia.Api.Repository.GraphRepository
             {
                 InterestArea vertexAssociationInterestingArea = vertexAssociation.InterestArea;
 
-                if (user.InterestArea.Contains(vertexAssociationInterestingArea))
+                if (user.InterestArea.Any(x => x.InterestAreaId == vertexAssociationInterestingArea.InterestAreaId))
                 {
                     usersWithSimilarInterests.AddRange(vertexAssociation.Users);
                 }

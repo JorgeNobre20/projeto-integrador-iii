@@ -19,11 +19,11 @@ namespace SocialMedia.Api.Controllers
 
         // Endpoint para criar um novo Login
         [HttpPost("login")]
-        public IActionResult CadastroLogin([FromBody] string email, string password, string name)
+        public IActionResult CadastroLogin(string email, string password, string name)
         {
             try
             {
-                if (_socialMediaService.CreateLogin(name,email, password))
+                if (_socialMediaService.CreateLogin(email, password, name))
                 {
                     return Ok();
                 }
@@ -32,6 +32,23 @@ namespace SocialMedia.Api.Controllers
             catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred while creating the user: {ex.Message}");
+            }
+        }
+        [HttpGet("login")]
+        public IActionResult Login(string email, string password)
+        {
+            try
+            {
+                var login = _socialMediaService.GetLogin(email, password);
+                if (login != null)
+                {
+                    return Ok(login);
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while retrieving the user: {ex.Message}");
             }
         }
 

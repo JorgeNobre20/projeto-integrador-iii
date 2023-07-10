@@ -202,5 +202,24 @@ namespace SocialMedia.Api.Services
                 throw new Exception("SQL Exception:" + ex.Message);
             }
         }
+        public Login GetLogin(string email, string password)
+        {
+            try
+            {
+                var login = _socialMediaRepository.Logins.Where(x => x.Email.Equals(email) && x.Password.Equals(password)).FirstOrDefault();
+            
+                if(login != null)
+                {
+                    return login;
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
+        }
     }
 }
