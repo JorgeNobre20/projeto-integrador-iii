@@ -2,6 +2,8 @@
 using SocialMedia.Api.Repository;
 using SocialMedia.Api.Models;
 using SocialMedia.Api.Services.Interfaces;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace SocialMedia.Api.Services
 {
@@ -166,47 +168,47 @@ namespace SocialMedia.Api.Services
                 throw new Exception("SQL Exception:" + ex.Message);
             }
         }
-        public bool CreateLogin(string email, string password, string name)
-        {
-            try
-            {
-                Login login = new Login
-                {
-                    Email = email,
-                    Password = password
-                };
+        //public bool CreateLogin(string email, string password, string name)
+        //{
+        //    try
+        //    {
+        //        Login login = new Login
+        //        {
+        //            Email = email,
+        //            Password = password
+        //        };
 
-                var newLogin = _socialMediaRepository.Logins.Add(login);
+        //        var newLogin = _socialMediaRepository.Logins.Add(login);
 
-                User user = new User
-                {
-                    Name = name,
-                    Login = newLogin.Entity
-                };
-                _socialMediaRepository.SaveChanges();
+        //        User user = new User
+        //        {
+        //            Name = name,
+        //            Login = newLogin.Entity
+        //        };
+        //        _socialMediaRepository.SaveChanges();
 
-                if (CreateUser(user))
-                {
+        //        if (CreateUser(user))
+        //        {
 
-                    if (newLogin.Entity != null)
-                    {
-                        return true;
-                    }
-                }
+        //            if (newLogin.Entity != null)
+        //            {
+        //                return true;
+        //            }
+        //        }
 
-                return false;
+        //        return false;
 
-            }catch (Exception ex)
-            {
-                // Handle the exception or log the error message
-                throw new Exception("SQL Exception:" + ex.Message);
-            }
-        }
+        //    }catch (Exception ex)
+        //    {
+        //        // Handle the exception or log the error message
+        //        throw new Exception("SQL Exception:" + ex.Message);
+        //    }
+        //}
         public Login GetLogin(string email, string password)
         {
             try
             {
-                var login = _socialMediaRepository.Logins.Where(x => x.Email.Equals(email) && x.Password.Equals(password)).FirstOrDefault();
+                var login = _socialMediaRepository.Users.Select(x => x.Login).Where(x => x.Email.Equals(email) && x.Password.Equals(password)).FirstOrDefault();
             
                 if(login != null)
                 {
@@ -214,6 +216,44 @@ namespace SocialMedia.Api.Services
                 }
                 return null;
 
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
+        }
+        public List<InterestArea> GetAllInterestArea()
+        {
+            try
+            {
+                var interestAreas = _socialMediaRepository.InterestAreas.ToList();
+
+                if (interestAreas != null)
+                {
+                    return interestAreas;
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception or log the error message
+                throw new Exception("SQL Exception:" + ex.Message);
+            }
+        }
+        public bool AddInterestArea(InterestArea interestArea)
+        {
+            try
+            {
+                var AddinterestArea = _socialMediaRepository.InterestAreas.Add(interestArea);
+                _socialMediaRepository.SaveChanges();
+
+                if (AddinterestArea.Entity != null)
+                {
+                    return true;
+                }
+                return false;
             }
             catch (Exception ex)
             {

@@ -18,22 +18,22 @@ namespace SocialMedia.Api.Controllers
         }
 
         // Endpoint para criar um novo Login
-        [HttpPost("login")]
-        public IActionResult CadastroLogin(string email, string password, string name)
-        {
-            try
-            {
-                if (_socialMediaService.CreateLogin(email, password, name))
-                {
-                    return Ok();
-                }
-                return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, $"An error occurred while creating the user: {ex.Message}");
-            }
-        }
+        //[HttpPost("login")]
+        //public IActionResult CadastroLogin(string email, string password, string name)
+        //{
+        //    try
+        //    {
+        //        if (_socialMediaService.CreateLogin(email, password, name))
+        //        {
+        //            return Ok();
+        //        }
+        //        return BadRequest();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, $"An error occurred while creating the user: {ex.Message}");
+        //    }
+        //}
         [HttpGet("login")]
         public IActionResult Login(string email, string password)
         {
@@ -195,6 +195,40 @@ namespace SocialMedia.Api.Controllers
                 return BadRequest();
             }
             catch(Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while delete the job offer: {ex.Message}");
+            }
+        }
+        [HttpGet("areainteresse")]
+        public IActionResult GetAllInterestArea()
+        {
+            try
+            {
+                var interestAreas = _socialMediaService.GetAllInterestArea();
+
+                if (interestAreas != null)
+                {
+                    return Ok(interestAreas);
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred while retrieving all interest areas: {ex.Message}");
+            }
+        }
+        [HttpPost("areainteresse/adicionar")]
+        public IActionResult AddInterestArea([FromBody] InterestArea interestArea)
+        {
+            try
+            {
+                if (_socialMediaService.AddInterestArea(interestArea))
+                {
+                    return Ok(interestArea);
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
             {
                 return StatusCode(500, $"An error occurred while delete the job offer: {ex.Message}");
             }

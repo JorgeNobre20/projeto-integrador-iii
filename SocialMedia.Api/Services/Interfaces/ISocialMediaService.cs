@@ -5,7 +5,7 @@ namespace SocialMedia.Api.Services.Interfaces
 {
     public interface ISocialMediaService
     {
-        bool CreateLogin(string email, string password, string name);
+        //bool CreateLogin(string email, string password, string name);
         bool CreateUser(User user);
         User GetUserById(int userId);
         bool CreateJobOffer(JobOffer jobOffer);
@@ -15,5 +15,7 @@ namespace SocialMedia.Api.Services.Interfaces
         bool UpdateJobOffer(JobOffer jobOffer);
         bool DeleteJobOffer(JobOffer jobOffer);
         Login GetLogin(string email, string password);
+        List<InterestArea> GetAllInterestArea();
+        bool AddInterestArea(InterestArea interestArea);
     }
 }
