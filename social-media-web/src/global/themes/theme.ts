@@ -10,7 +10,14 @@ export const theme = {
     buttonLabel: "#FFFFFF",
     forgotPasswordText: "#3D66A4",
     light: "#FFFFFF",
-    secondaryAction: "#00A3D7"
+    secondaryAction: "#00A3D7",
+    danger: "#FD0202",
+    filterLabel: "#9C9C9C",
+    dark: "#000000",
+    disabledInterestingAreaChipBackground: "#D9D9D9",
+    disabledInterestingAreaChip: "#999595",
+    interestingAreaChipBackground: "#D9D9D9",
+    interestingAreaChip: "#999595"
   },
 
   radius: {
@@ -18,3 +25,4 @@ export const theme = {
     button: "4px"
   }
 }
+

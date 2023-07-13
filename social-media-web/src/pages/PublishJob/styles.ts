@@ -1,7 +1,17 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
-import { Text } from "../Text";
+import { Text } from "../../components";
+
+export const Content = styled.main`  
+  position: relative;
+  height: 100%;
+  display: flex;
+  width: 100%;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.contentWrapperBackground};
+`;
 
 export const Form = styled.form`
   position: relative;
@@ -23,17 +33,4 @@ export const FormTitle = styled(Text).attrs({
   margin-bottom: 2rem;
 `;
 
-export const ComplementText = styled(Text)`
-  color: ${({ theme }) => theme.colors.formTitle};
-  font-weight: 500;
-  margin: 0.5rem 0px;
-`;
-
-
-export const SecondaryActionLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.secondaryAction};
-  font-size: 1rem;
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-`;
 

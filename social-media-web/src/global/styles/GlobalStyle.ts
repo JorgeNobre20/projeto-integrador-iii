@@ -23,6 +23,10 @@ export const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  ul{
+    list-style: none;
+  }
+
   a{
     text-decoration: none;
   }

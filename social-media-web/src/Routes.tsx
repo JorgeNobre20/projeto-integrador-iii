@@ -4,15 +4,67 @@ import {
   Route
 } from "react-router-dom";
 
-import { Login, PasswordRecovery, Register } from "./pages";
+import { Home, Login, MyPublishedJobs, People, PublishJob, Register } from "./pages";
  
+type RouteProps = {
+  path: string;
+  component: JSX.Element;
+  index?: boolean;
+}
+
+const CONTRACTING_PROFESSIONAL_ROUTES: RouteProps[] = [
+  {
+    component: <Home />,
+    path: "/",
+    index: true
+  },
+  {
+    component: <People />,
+    path: "/people"
+  }
+];
+
+const HIRING_PROFESSIONAL_ROUTES: RouteProps[] = [
+  {
+    component: <MyPublishedJobs />,
+    path: "/my-published-jobs",
+  },
+  {
+    component: <PublishJob />,
+    path: "/publish-job",
+  },
+];
+
+
+const AUTHENTICATION_ROUTES: RouteProps[] = [
+  {
+    component: <Login />,
+    path: "/login"
+  },
+  {
+    component: <Register />,
+    path: "/register"
+  }
+];
+
+const ROUTES: RouteProps[] = [
+  ...CONTRACTING_PROFESSIONAL_ROUTES,
+  ...HIRING_PROFESSIONAL_ROUTES,
+  ...AUTHENTICATION_ROUTES
+];
+
 export const Routes = () => {
   return (
     <BrowserRouter>
       <Router>
-        <Route path="/login" Component={Login} />Z
-        <Route path="/register" Component={Register} />Z
-        <Route path="/password-recovery" Component={PasswordRecovery} />Z
+        {ROUTES.map((route) => (
+          <Route 
+            index={route.index} 
+            Component={() => route.component} 
+            path={route.path} 
+            key={route.path}
+          />
+        ))} 
       </Router>
     </BrowserRouter>
   );
